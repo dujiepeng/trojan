@@ -92,6 +92,13 @@ Flags:
   -h, --help   help for trojan
 ```
 
+## 开发与发布
+1. 修改代码后，执行 `./build.sh` 进行编译 (需配置 `github_token`)。
+2. 或者是手动发布：
+   - 推送标签：`git push --tags`
+   - 在 GitHub 项目页面的 **Releases** 栏目中，基于新生成的标签创建一个 **New Release**。
+   - 将编译好的二进制文件 (`trojan-linux-amd64` 等) 作为附件上传到该 Release 中。
+
 ## 注意
 安装完trojan后强烈建议开启BBR等加速: [one_click_script](https://github.com/jinwyp/one_click_script)  
 
