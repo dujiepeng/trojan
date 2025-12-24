@@ -25,8 +25,8 @@
 - **自动化构建**: `.github/workflows/` 下配置了 Docker 推送和 GitHub Release 自动发布。
 
 ## 5. 当前存在的问题
-- **首页缺失**: `web/templates` 目录下本应包含编译后的前端资源（`index.html` 和 `static/`），但根据 `git status` 显示，这些文件目前已被物理删除且尚未提交，导致 Web 面板无法正常工作。
-- **引用陈旧**: 部分脚本 (`install.sh`) 曾指向旧的仓库地址 (`Jrohy/trojan`)，虽然已有部分修复，但仍需确保所有硬编码地址均已更新为 `dujiepeng/trojan`。
+- **资源完全本地化**: 已将前端编译产物、`acme.sh` 安装脚本、`systemctl` 适配脚本以及 `trojan-web.service` 全部同步并集成到项目 `asset/` 目录中。程序已从“在线下载依赖”转变为“内置资源分发”，确保了在源失效的情况下依然能够正常安装和使用。
+- **配置一致性**: 确保了 `install.sh`、`build.sh` 和内部 Go 代码中的所有仓库引用均指向 `dujiepeng/trojan`，保证了分发渠道的独立性。
 
 ## 6. 后续行动指南
 - **补全前端**: 找回并集成 `Jrohy/trojan-web` 的编译产物。

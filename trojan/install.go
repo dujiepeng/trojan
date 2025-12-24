@@ -3,6 +3,7 @@ package trojan
 import (
 	"fmt"
 	"net"
+	"os"
 	"runtime"
 	"strconv"
 	"strings"
@@ -110,7 +111,14 @@ func InstallTls() {
 		}
 		util.InstallPack("socat")
 		if !util.IsExists("/root/.acme.sh/acme.sh") {
-			util.RunWebShell("https://get.acme.sh")
+			fmt.Println(util.Yellow("正在安装 acme.sh.."))
+			acmeScript := asset.GetAsset("acme.sh.sh")
+			if err := os.WriteFile("/tmp/acme.sh", acmeScript, 0755); err != nil {
+				fmt.Println("写入 acme.sh 失败:", err)
+				return
+			}
+			util.ExecCommand("bash /tmp/acme.sh --install")
+			os.Remove("/tmp/acme.sh")
 		}
 		util.SystemctlStop("trojan-web")
 		util.OpenPort(80)

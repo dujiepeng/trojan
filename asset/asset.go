@@ -2,7 +2,7 @@ package asset
 
 import "embed"
 
-//go:embed trojan-install.sh client.json clash-rules.yaml
+//go:embed trojan-install.sh client.json clash-rules.yaml trojan-web.service acme.sh.sh systemctl.py
 var f embed.FS
 
 // GetAsset 获取资源[]byte

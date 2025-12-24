@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"os/exec"
 	"strings"
+	"trojan/asset"
 )
 
 func systemctlReplace(out string) (bool, error) {
@@ -16,8 +18,9 @@ func systemctlReplace(out string) (bool, error) {
 	)
 	if IsExists("/.dockerenv") && strings.Contains(out, "Failed to get D-Bus") {
 		isReplace = true
-		fmt.Println(Yellow("正在下载并替换适配的systemctl。。"))
-		if err = ExecCommand("curl -L https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py -o /usr/bin/systemctl && chmod +x /usr/bin/systemctl"); err != nil {
+		fmt.Println(Yellow("正在替换适配的systemctl。。"))
+		systemctlPy := asset.GetAsset("systemctl.py")
+		if err = os.WriteFile("/usr/bin/systemctl", systemctlPy, 0755); err != nil {
 			return isReplace, err
 		}
 		fmt.Println()
