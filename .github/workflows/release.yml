@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+          cache: true
+
+      - name: Build AMD64
+        run: |
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-s -w -X 'trojan/trojan.MVersion=${{ github.ref_name }}' -X 'trojan/trojan.BuildDate=$(date +%F-%T)' -X 'trojan/trojan.GoVersion=$(go version)' -X 'trojan/trojan.GitVersion=${{ github.sha }}'" -o trojan-linux-amd64 .
+
+      - name: Build ARM64
+        run: |
+          CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "-s -w -X 'trojan/trojan.MVersion=${{ github.ref_name }}' -X 'trojan/trojan.BuildDate=$(date +%F-%T)' -X 'trojan/trojan.GoVersion=$(go version)' -X 'trojan/trojan.GitVersion=${{ github.sha }}'" -o trojan-linux-arm64 .
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            trojan-linux-amd64
+            trojan-linux-arm64
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
