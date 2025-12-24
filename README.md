@@ -24,16 +24,15 @@ trojan多用户管理部署程序
 ## 安装方式
 *trojan使用请提前准备好服务器可用的域名*  
 
-###  a. 一键脚本安装
-```
-#安装/更新
+###  a. 一键脚本安装/卸载
+```bash
+# 安装/更新
 bash <(curl -sL https://raw.githubusercontent.com/dujiepeng/trojan/main/install.sh)
 
-#卸载
+# 卸载
 bash <(curl -sL https://raw.githubusercontent.com/dujiepeng/trojan/main/install.sh) --remove
-
 ```
-安装完后输入'trojan'可进入管理程序   
+安装完后输入 `trojan` 可进入管理程序   
 浏览器访问 https://域名 可在线web页面管理trojan用户  
 前端页面源码地址: [trojan-web](https://github.com/dujiepeng/trojan-web)
 
