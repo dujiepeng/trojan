@@ -1,14 +1,14 @@
 FROM --platform=$TARGETPLATFORM centos:7
 
-LABEL maintainer="Jrohy <euvkzx@Jrohy.com>"
+LABEL maintainer="dujiepeng <dujiepeng@gmail.com>"
 
 ARG TARGETARCH
 
-ARG VERSION_CHECK="https://api.github.com/repos/Jrohy/trojan/releases/latest"
+ARG VERSION_CHECK="https://api.github.com/repos/dujiepeng/trojan/releases/latest"
 
-ARG DOWNLAOD_URL="https://github.com/Jrohy/trojan/releases/download/"
+ARG DOWNLAOD_URL="https://github.com/dujiepeng/trojan/releases/download/"
 
-ARG SERVICE_URL="https://raw.githubusercontent.com/Jrohy/trojan/master/asset/trojan-web.service"
+ARG SERVICE_URL="https://raw.githubusercontent.com/dujiepeng/trojan/main/asset/trojan-web.service"
 
 ARG SYSTEMCTL_URL="https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py"
 

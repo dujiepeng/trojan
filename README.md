@@ -1,8 +1,8 @@
 # trojan
-![](https://img.shields.io/github/v/release/Jrohy/trojan.svg) 
-![](https://img.shields.io/docker/pulls/jrohy/trojan.svg)
-[![Go Report Card](https://goreportcard.com/badge/github.com/Jrohy/trojan)](https://goreportcard.com/report/github.com/Jrohy/trojan)
-[![Downloads](https://img.shields.io/github/downloads/Jrohy/trojan/total.svg)](https://img.shields.io/github/downloads/Jrohy/trojan/total.svg)
+![](https://img.shields.io/github/v/release/dujiepeng/trojan.svg) 
+![](https://img.shields.io/docker/pulls/dujiepeng/trojan.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/dujiepeng/trojan)](https://goreportcard.com/report/github.com/dujiepeng/trojan)
+[![Downloads](https://img.shields.io/github/downloads/dujiepeng/trojan/total.svg)](https://img.shields.io/github/downloads/dujiepeng/trojan/total.svg)
 [![License](https://img.shields.io/badge/license-GPL%20V3-blue.svg?longCache=true)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 
@@ -35,7 +35,7 @@ bash <(curl -sL https://raw.githubusercontent.com/dujiepeng/trojan/main/install.
 ```
 安装完后输入'trojan'可进入管理程序   
 浏览器访问 https://域名 可在线web页面管理trojan用户  
-前端页面源码地址: [trojan-web](https://github.com/Jrohy/trojan-web)
+前端页面源码地址: [trojan-web](https://github.com/dujiepeng/trojan-web)
 
 ### b. docker运行
 1. 安装mysql  
@@ -48,7 +48,7 @@ docker run --name trojan-mariadb --restart=always -p 3306:3306 -v /home/mariadb:
 
 2. 安装trojan
 ```
-docker run -it -d --name trojan --net=host --restart=always --privileged jrohy/trojan init
+docker run -it -d --name trojan --net=host --restart=always --privileged dujiepeng/trojan init
 ```
 运行完后进入容器 `docker exec -it trojan bash`, 然后输入'trojan'即可进行初始化安装   
 
