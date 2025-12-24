@@ -1,5 +1,14 @@
 # Changelog
 
+## [v1.2.8] - 2025-12-24
+### 修改内容
+- 修复 `util/command.go` 中的 `RunWebShell` 函数，增加网络请求失败时的错误处理，防止程序发生空指针崩溃（Panic）。
+- 解决由于缺少 `web/templates` 目录导致 `go build` 编译失败的问题。
+
+修改人: Antigravity
+修改时间: 2025-12-24
+修改版本: v1.2.8
+
 ## [v1.2.7] - 2025-12-24
 ### 修改内容
 - 修复 `trojan/install.go` 中的 Docker 安装源，切换为官方 `get.docker.com`，解决 Ubuntu 等系统下的安装 404 问题。
