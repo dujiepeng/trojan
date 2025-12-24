@@ -2,6 +2,11 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Tag name for release (e.g. v1.3.8)'
+        required: true
+        default: 'v1.3.8'
   push:
     tags:
       - 'v*'
@@ -22,15 +27,18 @@ jobs:
 
       - name: Build AMD64
         run: |
-          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-s -w -X 'trojan/trojan.MVersion=${{ github.ref_name }}' -X 'trojan/trojan.BuildDate=$(date +%F-%T)' -X 'trojan/trojan.GoVersion=$(go version)' -X 'trojan/trojan.GitVersion=${{ github.sha }}'" -o trojan-linux-amd64 .
+          VERSION=${{ github.event.inputs.tag_name || github.ref_name }}
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-s -w -X 'trojan/trojan.MVersion=$VERSION' -X 'trojan/trojan.BuildDate=$(date +%F-%T)' -X 'trojan/trojan.GoVersion=$(go version)' -X 'trojan/trojan.GitVersion=${{ github.sha }}'" -o trojan-linux-amd64 .
 
       - name: Build ARM64
         run: |
-          CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "-s -w -X 'trojan/trojan.MVersion=${{ github.ref_name }}' -X 'trojan/trojan.BuildDate=$(date +%F-%T)' -X 'trojan/trojan.GoVersion=$(go version)' -X 'trojan/trojan.GitVersion=${{ github.sha }}'" -o trojan-linux-arm64 .
+          VERSION=${{ github.event.inputs.tag_name || github.ref_name }}
+          CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "-s -w -X 'trojan/trojan.MVersion=$VERSION' -X 'trojan/trojan.BuildDate=$(date +%F-%T)' -X 'trojan/trojan.GoVersion=$(go version)' -X 'trojan/trojan.GitVersion=${{ github.sha }}'" -o trojan-linux-arm64 .
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ github.event.inputs.tag_name }}
           files: |
             trojan-linux-amd64
             trojan-linux-arm64
