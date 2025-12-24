@@ -25,8 +25,8 @@
 - **自动化构建**: `.github/workflows/` 下配置了 Docker 推送和 GitHub Release 自动发布。
 
 ## 5. 当前存在的问题
-- **首页缺失**: `web/templates` 目录下缺乏真实的前端编译包，导致 Web 面板无法登录。
-- **引用陈旧**: 部分脚本 (`install.sh`) 仍指向旧的仓库地址 (`Jrohy/trojan`)，增加了维护成本。
+- **首页缺失**: `web/templates` 目录下本应包含编译后的前端资源（`index.html` 和 `static/`），但根据 `git status` 显示，这些文件目前已被物理删除且尚未提交，导致 Web 面板无法正常工作。
+- **引用陈旧**: 部分脚本 (`install.sh`) 曾指向旧的仓库地址 (`Jrohy/trojan`)，虽然已有部分修复，但仍需确保所有硬编码地址均已更新为 `dujiepeng/trojan`。
 
 ## 6. 后续行动指南
 - **补全前端**: 找回并集成 `Jrohy/trojan-web` 的编译产物。
